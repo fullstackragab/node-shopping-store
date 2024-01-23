@@ -15,6 +15,7 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 app.post("/api/create-checkout-session", async (req, res) => {
+  const origin = req.get("origin");
   const lineItems = req.body.map((item) => ({
     price_data: {
       currency: "usd",
@@ -31,16 +32,14 @@ app.post("/api/create-checkout-session", async (req, res) => {
     payment_method_types: ["card"],
     line_items: lineItems,
     mode: "payment",
-    success_url:
-      "https://shopping-store-002-8qzy9ng43-abdelfattah-ragabs-projects.vercel.app/success",
-    cancel_url:
-      "https://shopping-store-002-8qzy9ng43-abdelfattah-ragabs-projects.vercel.app/cancel",
+    success_url: origin + "/success",
+    cancel_url: origin + "/cancel",
   });
 
   res.json({ id: session.id });
 });
 
 // Listen
-app.listen(80, () => {
-  console.log("Server started at port 80");
+app.listen(8000, () => {
+  console.log("Server started at port 8000");
 });
