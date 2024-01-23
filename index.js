@@ -15,14 +15,12 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 app.post("/api/create-checkout-session", async (req, res) => {
-  const imagePath =
-    "https://shopping-store-v5.netlify.app/assets/images/products/";
   const lineItems = req.body.map((item) => ({
     price_data: {
       currency: "usd",
       product_data: {
         name: item.name,
-        images: ["https://han.duj.mybluehost.me/thumbs/" + item.id + ".jpg"],
+        images: [item.imageUrl],
       },
       unit_amount: Math.round(item.price * 100),
     },
@@ -33,14 +31,16 @@ app.post("/api/create-checkout-session", async (req, res) => {
     payment_method_types: ["card"],
     line_items: lineItems,
     mode: "payment",
-    success_url: "https://shopping-store-002.vercel.app/success",
-    cancel_url: "https://shopping-store-002.vercel.app/cancel",
+    success_url:
+      "https://shopping-store-002-8qzy9ng43-abdelfattah-ragabs-projects.vercel.app/success",
+    cancel_url:
+      "https://shopping-store-002-8qzy9ng43-abdelfattah-ragabs-projects.vercel.app/cancel",
   });
 
   res.json({ id: session.id });
 });
 
 // Listen
-app.listen(4000, () => {
-  console.log("Server started at port 4000");
+app.listen(80, () => {
+  console.log("Server started at port 80");
 });
