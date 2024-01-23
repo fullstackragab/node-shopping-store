@@ -33,14 +33,14 @@ app.post("/api/create-checkout-session", async (req, res) => {
     payment_method_types: ["card"],
     line_items: lineItems,
     mode: "payment",
-    success_url: "https://warm-marshmallow-2abf70.netlify.app/success",
-    cancel_url: "https://warm-marshmallow-2abf70.netlify.app/cancel",
+    success_url: "https://shopping-store-002.vercel.app/success",
+    cancel_url: "https://shopping-store-002.vercel.app/cancel",
   });
 
   res.json({ id: session.id });
 });
 
 // Listen
-app.listen(8000, () => {
-  console.log("Server started at port 8000");
+app.listen(4000, () => {
+  console.log("Server started at port 4000");
 });
